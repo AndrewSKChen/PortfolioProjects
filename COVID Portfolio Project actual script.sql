@@ -133,7 +133,7 @@ FROM #PercentPopulationVaccinated
 
 -- Creating View to Store Data for Later Use
 
-CREATE View PercentPopulationVaccinated as 
+CREATE VIEW PercentPopulationVaccinated as 
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.location ORDER by dea.location, dea.date) as RollingPeopleVaccinated
 --, (RollingPeopleVaccinated/population)*100
@@ -145,7 +145,6 @@ WHERE dea.continent is not null
 --ORDER BY 2,3
 
 
-
-
+	
 SELECT *
 FROM PercentPopulationVaccinated
